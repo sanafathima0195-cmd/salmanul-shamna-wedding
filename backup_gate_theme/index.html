@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="emerald">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Wedding Invitation | Salmanul Faris &amp; Shamna Inna</title>
+  
+  <!-- SEO & Social Sharing Meta Tags -->
+  <meta name="description" content="You are cordially invited to celebrate the auspicious wedding ceremony of Salmanul Faris & Shamna Inna on Monday, 16 November 2026 at Nadhas Auditorium, Vaikathur, Valancheri.">
+  <meta property="og:title" content="Royal Wedding Invitation | Salmanul Faris & Shamna Inna">
+  <meta property="og:description" content="Celebrate with us at Nadhas Auditorium, Vaikathur, Valancheri. View ceremony timings, interactive save the date, live countdown, and location directions.">
+  <meta property="og:image" content="assets/images/venue_qr.png">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Marcellus&family=Noto+Nastaliq+Urdu:wght@400;700&family=Outfit:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Floating Ambient Particles Canvas -->
+  <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+
+  <!-- Atmospheric Background Overlays -->
+  <div class="ambient-backdrop" aria-hidden="true"></div>
+  <div class="pattern-overlay" aria-hidden="true"></div>
+
+  <!-- ==========================================================================
+       ROYAL GATE / 3D DOOR OPENING REVEAL (EMERALD & 24K GOLD)
+       ========================================================================== -->
+  <div id="royalGateOverlay" class="royal-gate-overlay" role="dialog" aria-modal="true" aria-label="Royal Invitation Opening">
+    <!-- Left Door -->
+    <div class="gate-door gate-door-left">
+      <div class="door-arch-ornament">
+        <div class="door-inner-filigree"></div>
+      </div>
+    </div>
+
+    <!-- Center Wax Seal & Royal Button -->
+    <div class="gate-seal-center">
+      <!-- Royal Monogram Crest -->
+      <svg class="seal-crest-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="47" stroke="var(--accent-primary)" stroke-width="1.8" stroke-dasharray="3 3"/>
+        <circle cx="50" cy="50" r="42" stroke="var(--accent-primary)" stroke-width="1.2"/>
+        <circle cx="50" cy="50" r="37" stroke="var(--accent-primary)" stroke-width="0.7" stroke-dasharray="2 2"/>
+        <!-- Royal Crown Motif -->
+        <path d="M35 34 L50 20 L65 34 L60 44 L40 44 Z" fill="var(--accent-primary)" opacity="0.95"/>
+        <circle cx="50" cy="18" r="3" fill="var(--accent-light)"/>
+        <circle cx="35" cy="32" r="2.5" fill="var(--accent-light)"/>
+        <circle cx="65" cy="32" r="2.5" fill="var(--accent-light)"/>
+        <!-- Intertwined Monogram SF & SI -->
+        <text x="50" y="65" text-anchor="middle" font-family="'Cinzel', serif" font-weight="700" font-size="18" fill="var(--accent-light)" letter-spacing="1">S &amp; S</text>
+        <path d="M28 73 Q50 63 72 73" stroke="var(--accent-primary)" stroke-width="1.5" fill="none"/>
+        <path d="M34 79 Q50 71 66 79" stroke="var(--accent-primary)" stroke-width="1" fill="none"/>
+        <circle cx="50" cy="73" r="3" fill="var(--accent-light)"/>
+      </svg>
+      
+      <span class="seal-subheading">Royal Wedding Invitation</span>
+      <h2 id="gateSealNames" class="seal-title">Salmanul Faris &amp; Shamna Inna</h2>
+      <p class="seal-invite-text">In the Name of Allah, the Most Gracious, the Most Merciful</p>
+
+      <button id="btnOpenInvitation" class="btn-open-royal" type="button" aria-label="Open Royal Invitation">
+        <span>Open Invitation</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Right Door -->
+    <div class="gate-door gate-door-right">
+      <div class="door-arch-ornament">
+        <div class="door-inner-filigree"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       ROYAL AUDIO ELEMENT (Hob A3ma - حب أعمى by ObaidaProNP1)
+       ========================================================================== -->
+  <audio id="weddingAudio" loop preload="auto">
+    <source src="assets/audio/hob-a3ma.webm" type="audio/webm">
+    <source src="assets/audio/bi-saraha-clean.m4a" type="audio/mp4">
+  </audio>
+
+  <!-- ==========================================================================
+       FLOATING CONTROLS (MUSIC & GREEN PALETTES PICKER)
+       ========================================================================== -->
+  <div class="floating-controls">
+    <!-- Live Green Theme Picker -->
+    <div class="theme-picker-wrap">
+      <button id="btnThemeToggle" class="theme-picker-btn" type="button" aria-label="Choose Green Shade">
+        <span class="theme-dot emerald"></span>
+        <span id="currentThemeLabel">Royal Emerald</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      <div id="themeDropdown" class="theme-dropdown">
+        <div class="theme-dropdown-header">Choose Your Shade of Green</div>
+        <button class="theme-option-btn active" data-set-theme="emerald">
+          <span class="theme-dot emerald"></span> Royal Emerald &amp; 24K Gold
+        </button>
+        <button class="theme-option-btn" data-set-theme="forest">
+          <span class="theme-dot forest"></span> Deep Forest Pine &amp; Champagne
+        </button>
+        <button class="theme-option-btn" data-set-theme="olive">
+          <span class="theme-dot olive"></span> Royal Olive Jade &amp; Bronze
+        </button>
+        <button class="theme-option-btn" data-set-theme="cypress">
+          <span class="theme-dot cypress"></span> Midnight Cypress &amp; Gold
+        </button>
+        <button class="theme-option-btn" data-set-theme="malabar">
+          <span class="theme-dot malabar"></span> Malabar Botanical &amp; Gold
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Music Pill -->
+    <button id="btnToggleMusic" class="music-pill-btn" type="button" aria-label="Toggle Music: Hob A3ma (حب أعمى)" title="Hob A3ma - ObaidaProNP1 (حب أعمى)">
+      <div class="music-equalizer-bars" aria-hidden="true">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+      </div>
+      <span class="music-track-name">Hob A3ma • حب أعمى</span>
+      <span class="music-status-icon" aria-hidden="true">
+        <svg class="icon-playing" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
+        </svg>
+        <svg class="icon-paused" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="main-content">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      
+      <!-- Islamic Salam & Bismillah Calligraphy -->
+      <div class="bismillah-wrap">
+        <div class="arabic-salam-calligraphy" lang="ar">السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</div>
+        <div class="arabic-calligraphy" lang="ar">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+        <div class="bismillah-translation">In the Name of Allah, the Most Gracious, the Most Merciful</div>
+      </div>
+
+      <!-- Host Invitation Card -->
+      <div class="host-announcement-card">
+        <p class="host-parents-names">Mr. Mohammed &amp; Mrs. Sakkeena Mohammed</p>
+        <p class="host-address">Valiya Parambil Kizhakethil house, Pookattiri, Valancheri</p>
+        <a href="tel:+919846507386" class="host-contact-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>Ph: +91 98465 07386</span>
+        </a>
+        <p class="host-cordial-line">Sincerely invites you to celebrate the wedding ceremony of our beloved son</p>
+      </div>
+
+      <!-- Couple Names Headline -->
+      <div class="hero-couple-headline">
+        <h1 id="heroGroomName" class="couple-title-groom">Salmanul Faris</h1>
+        <div class="couple-ampersand">&amp;</div>
+        <h1 id="heroBrideName" class="couple-title-bride">Shamna Inna</h1>
+      </div>
+
+      <p class="hero-tagline">Two souls united in love and faith, guided by the grace of the Almighty.</p>
+
+      <!-- Quranic Blessing Verse -->
+      <div class="hero-quote-box">
+        <p class="quran-verse">
+          "And among His signs is that He created for you mates from among yourselves, that you may dwell in peace and tranquility with them, and He has put love and mercy between your hearts."
+        </p>
+        <span class="verse-source">— Surah Ar-Rum [30:21] —</span>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2L15 8L21 9L17 14L18 20L12 17L6 20L7 14L3 9L9 8L12 2Z"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 2. COUPLE SHOWCASE (PREMIUM MONOGRAM PLACEHOLDERS & FAMILY DETAILS) -->
+    <section class="couple-showcase-section" id="couple">
+      <div class="section-header">
+        <span class="section-tag">The Blessed Union</span>
+        <h2 class="section-title">Groom &amp; Bride</h2>
+        <p class="section-subtitle">Entering into sacred holy matrimony with hearts full of gratitude, devotion, and joy</p>
+      </div>
+
+      <div class="couple-showcase-grid">
+        <!-- Groom Card -->
+        <article class="couple-card">
+          <div class="card-corner top-left"></div>
+          <div class="card-corner top-right"></div>
+          <div class="card-corner bottom-left"></div>
+          <div class="card-corner bottom-right"></div>
+
+          <!-- Photo Arch Frame with Blank / Monogram Placeholder -->
+          <div class="photo-arch-frame">
+            <div class="photo-arch-inner" id="groomPhotoContainer">
+              <img id="groomPhoto" src="assets/images/groom.jpg" alt="Photograph of Salmanul Faris" class="couple-img" onload="this.style.display='block'; var p=document.getElementById('groomPlaceholder'); if(p) p.style.display='none';" onerror="this.style.display='none'; var p=document.getElementById('groomPlaceholder'); if(p) p.style.display='flex';">
+              
+              <!-- Blank / Royal Placeholder Fallback -->
+              <div id="groomPlaceholder" class="royal-blank-placeholder" style="display: none;">
+                <div class="blank-inner-crest">
+                  <svg class="crest-svg" viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="36" stroke="var(--accent-primary)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <circle cx="40" cy="40" r="30" stroke="var(--accent-primary)" stroke-width="1"/>
+                    <path d="M26 28 L40 18 L54 28 L48 37 L32 37 Z" fill="var(--accent-primary)" opacity="0.85"/>
+                    <text x="40" y="54" text-anchor="middle" font-family="'Cinzel', serif" font-weight="700" font-size="16" fill="var(--accent-light)">SF</text>
+                  </svg>
+                  <span class="placeholder-label">The Groom</span>
+                  <span class="placeholder-sub">Salmanul Faris</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="couple-role-pill">The Groom</span>
+          <h3 id="groomCardName" class="person-name">Salmanul Faris</h3>
+          <div class="person-parents">
+            <span class="parents-label">Beloved Son of</span>
+            <span id="groomCardParents" class="parents-names">Mr. Mohammed &amp; Mrs. Sakkeena Mohammed</span>
+            <span class="parents-residence">Valiya Parambil Kizhakethil house, Pookattiri, Valancheri</span>
+            <div class="person-contact-wrap">
+              <a href="tel:+919846507386" class="contact-pill-btn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <span>+91 98465 07386</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Center Emblem -->
+        <div class="showcase-center-emblem" aria-hidden="true">
+          <svg class="interlocking-rings" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+            <circle cx="38" cy="50" r="26" stroke-width="3" stroke="var(--accent-primary)"/>
+            <circle cx="62" cy="50" r="26" stroke-width="3" stroke="var(--accent-light)"/>
+            <path d="M38 24 L42 20 L46 24 L42 28 Z" fill="#ffffff"/>
+            <path d="M62 24 L66 20 L70 24 L66 28 Z" fill="#ffffff"/>
+          </svg>
+          <span class="knot-text">United in Faith</span>
+          <span class="knot-hijri-date">1448 Ja: Akhir 6</span>
+        </div>
+
+        <!-- Bride Card -->
+        <article class="couple-card">
+          <div class="card-corner top-left"></div>
+          <div class="card-corner top-right"></div>
+          <div class="card-corner bottom-left"></div>
+          <div class="card-corner bottom-right"></div>
+
+          <!-- Photo Arch Frame with Photo -->
+          <div class="photo-arch-frame">
+            <div class="photo-arch-inner" id="bridePhotoContainer">
+              <img id="bridePhoto" src="assets/images/bride.jpg" alt="Photograph of Shamna Inna" class="couple-img" onload="this.style.display='block'; var p=document.getElementById('bridePlaceholder'); if(p) p.style.display='none';" onerror="this.style.display='none'; var p=document.getElementById('bridePlaceholder'); if(p) p.style.display='flex';">
+              
+              <!-- Blank / Royal Placeholder Fallback -->
+              <div id="bridePlaceholder" class="royal-blank-placeholder" style="display: none;">
+                <div class="blank-inner-crest">
+                  <svg class="crest-svg" viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="36" stroke="var(--accent-primary)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                    <circle cx="40" cy="40" r="30" stroke="var(--accent-primary)" stroke-width="1"/>
+                    <path d="M40 20 L44 30 L55 33 L46 41 L49 52 L40 46 L31 52 L34 41 L25 33 L36 30 Z" fill="var(--accent-primary)" opacity="0.85"/>
+                    <text x="40" y="55" text-anchor="middle" font-family="'Cinzel', serif" font-weight="700" font-size="16" fill="var(--accent-light)">SI</text>
+                  </svg>
+                  <span class="placeholder-label">The Bride</span>
+                  <span class="placeholder-sub">Shamna Inna</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="couple-role-pill">The Bride</span>
+          <h3 id="brideCardName" class="person-name">Shamna Inna</h3>
+          <div class="person-parents">
+            <span class="parents-label">Cherished Daughter of</span>
+            <span id="brideCardParents" class="parents-names">Mr. Shamsudheen &amp; Mrs. Soudath Shamsudheen</span>
+            <span class="parents-residence">Alungal House, Veliyamcode, Ponnani</span>
+            <div class="person-contact-wrap">
+              <span class="family-blessing-tag">Veliyamcode, Ponnani</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 3. INTERACTIVE SCRATCH-TO-REVEAL CARD -->
+    <section class="scratch-reveal-section" id="saveTheDate">
+      <div class="section-header">
+        <span class="section-tag">Interactive Save The Date</span>
+        <h2 class="section-title">Save Our Special Date</h2>
+        <p class="section-subtitle">Scratch the 24K emerald &amp; gold foil below using your finger or mouse to unveil the wedding day</p>
+      </div>
+
+      <div class="scratch-section-wrap">
+        <div class="scratch-card-container">
+          <!-- Hidden Revealed Content -->
+          <div class="scratch-hidden-content">
+            <span class="scratch-date-badge">Auspicious Wedding Day</span>
+            <h3 id="scratchDateDisplay" class="revealed-date-text">Monday, November 16, 2026</h3>
+            <p class="revealed-hijri-sub">(1448 Ja: Akhir 6 • Jumada al-Akhirah)</p>
+            <p id="scratchTimeDisplay" class="revealed-time-text">Ceremony at 11:30 AM (Noon onwards)</p>
+            <p id="scratchVenueDisplay" class="revealed-venue-summary">Nadhas Auditorium, Vaikathur, Valancheri</p>
+          </div>
+
+          <!-- HTML5 Interactive Scratch Canvas -->
+          <canvas id="scratchCanvas"></canvas>
+        </div>
+
+        <div id="scratchInstruction" class="scratch-instruction">
+          <span>✨ Scratch using touch or mouse to reveal</span>
+        </div>
+
+        <button id="btnInstantReveal" class="scratch-reveal-btn" type="button">
+          Click here to reveal immediately
+        </button>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 4. LIVE COUNTDOWN TIMER -->
+    <section class="countdown-section" id="countdown">
+      <div class="section-header">
+        <span class="section-tag">Anticipation</span>
+        <h2 class="section-title">The Countdown Begins</h2>
+        <p id="countdownStatus" class="section-subtitle">Counting every precious heartbeat until the blessed moment</p>
+      </div>
+
+      <div class="countdown-box-grid">
+        <div class="timer-card">
+          <span id="timerDays" class="timer-number">00</span>
+          <span class="timer-label">Days</span>
+        </div>
+        <div class="timer-card">
+          <span id="timerHours" class="timer-number">00</span>
+          <span class="timer-label">Hours</span>
+        </div>
+        <div class="timer-card">
+          <span id="timerMins" class="timer-number">00</span>
+          <span class="timer-label">Minutes</span>
+        </div>
+        <div class="timer-card">
+          <span id="timerSecs" class="timer-number">00</span>
+          <span class="timer-label">Seconds</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 5. WEDDING EVENTS & ITINERARY -->
+    <section class="events-section" id="itinerary">
+      <div class="section-header">
+        <span class="section-tag">Program &amp; Schedule</span>
+        <h2 class="section-title">Order of Events</h2>
+        <p class="section-subtitle">Please grace the occasion with your respected family, presence, and prayers</p>
+      </div>
+
+      <div class="events-timeline">
+        <!-- Event 1: Sacred Nikah Ceremony -->
+        <div class="event-card left-side">
+          <span class="event-badge">Sacred Solemnization</span>
+          <h3 class="event-title">The Wedding Ceremony</h3>
+          <div class="event-time-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="nikahDateElem">Monday, November 16, 2026</span> • <span id="nikahTimeElem">11:30 AM</span>
+          </div>
+          <div id="nikahVenueElem" class="event-venue-row">Nadhas Auditorium, Vaikathur, Valancheri</div>
+          <p class="event-desc">
+            The auspicious wedding solemnization uniting Salmanul Faris &amp; Shamna Inna in the blessed presence of family, elders, and beloved guests.
+          </p>
+        </div>
+
+        <!-- Event 2: Celebratory Grand Feast -->
+        <div class="event-card right-side">
+          <span class="event-badge">Celebratory Banquet</span>
+          <h3 class="event-title">Grand Wedding Feast</h3>
+          <div class="event-time-row">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Following the Ceremony</span> • <span>12:00 PM (Noon onwards)</span>
+          </div>
+          <div class="event-venue-row">Grand Banquet Hall, Nadhas Auditorium</div>
+          <p class="event-desc">
+            A joyous celebration and traditional Malabar wedding banquet served with our heartfelt warmth and gratitude.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 6. VENUE & LOCATION (NADHAS AUDITORIUM) -->
+    <section class="venue-section" id="venue">
+      <div class="section-header">
+        <span class="section-tag">Destination</span>
+        <h2 class="section-title">The Wedding Venue</h2>
+        <p class="section-subtitle">We look forward to welcoming you with warmth, affection, and hospitality</p>
+      </div>
+
+      <div class="venue-wrapper">
+        <div class="venue-details-top">
+          <h3 id="venueTitleElem" class="venue-hall-name">Nadhas Auditorium</h3>
+          <div id="venueAuditoriumElem" class="venue-auditorium">Vaikathur, Valancheri, Malappuram</div>
+          <p id="venueFullAddressElem" class="venue-address-text">
+            Nadhas Auditorium &amp; Convention Centre, Vaikathur, Valanchery, Malappuram District, Kerala - 676552
+          </p>
+
+          <div class="venue-actions-row">
+            <a id="venueMapsLink" href="https://www.google.com/maps/search/?api=1&query=Nadhas+Auditorium+Valanchery+Kerala" target="_blank" rel="noopener noreferrer" class="btn-venue-action">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+              </svg>
+              <span>Get Directions on Google Maps</span>
+            </a>
+
+            <a id="btnAddToCal" href="#" target="_blank" rel="noopener noreferrer" class="btn-venue-action btn-secondary-action">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>Add to Calendar</span>
+            </a>
+
+            <a href="tel:+919846507386" class="btn-venue-action btn-secondary-action">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>Call Host: 9846507386</span>
+            </a>
+          </div>
+
+          <!-- QR Code Card matching the invitation card -->
+          <div class="venue-qr-container">
+            <div class="qr-box">
+              <img src="assets/images/venue_qr.png" alt="Scan QR Code to navigate to Nadhas Auditorium Valancheri on Google Maps" class="venue-qr-image">
+              <span class="qr-caption">Scan QR code with your mobile camera to navigate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps Embed -->
+        <div class="map-embed-container">
+          <iframe 
+            title="Location of Nadhas Auditorium Valancheri Kerala" 
+            src="https://maps.google.com/maps?q=Nadhas+Auditorium+Valanchery+Kerala&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            loading="lazy" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 7. FEATURED COUPLE PORTRAIT (TOGETHER) -->
+    <section class="gallery-section" id="gallery">
+      <div class="section-header">
+        <span class="section-tag">Cherished Moments</span>
+        <h2 class="section-title">Together in Love &amp; Faith</h2>
+        <p class="section-subtitle">“And He has put love and mercy between your hearts.” — Surah Ar-Rum</p>
+      </div>
+
+      <div class="featured-couple-wrapper">
+        <div class="featured-couple-card">
+          <div class="card-corner top-left"></div>
+          <div class="card-corner top-right"></div>
+          <div class="card-corner bottom-left"></div>
+          <div class="card-corner bottom-right"></div>
+
+          <div class="featured-couple-photo-frame">
+            <div class="featured-photo-inner">
+              <img src="assets/images/couple.jpg" alt="Salmanul Faris &amp; Shamna Inna Together" class="featured-couple-photo" loading="eager">
+              <div class="featured-photo-gradient-overlay">
+                <span class="featured-royal-crest">✦ &nbsp; S &amp; S &nbsp; ✦</span>
+                <h3 class="featured-couple-title">Salmanul Faris &amp; Shamna Inna</h3>
+                <p class="featured-couple-quote">United for eternity under the grace and mercy of the Almighty</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Royal Divider -->
+    <div class="royal-divider" aria-hidden="true">
+      <div class="divider-line"></div>
+      <div class="divider-ornament">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- 8. BLESSINGS & COMPLIMENTS (RSVP REMOVED) -->
+    <section class="compliments-section" id="compliments">
+      <div class="compliments-card-wrap">
+        <div class="compliments-highlight-card">
+          <div class="card-corner top-left"></div>
+          <div class="card-corner top-right"></div>
+          <div class="card-corner bottom-left"></div>
+          <div class="card-corner bottom-right"></div>
+
+          <div class="compliments-inner">
+            <div class="compliments-flower-icon">🌸</div>
+            <h4 class="compliments-title">With Best Compliments From</h4>
+            <p class="compliments-highlight">Friends &amp; Family</p>
+            <p class="compliments-dua">
+              "May Allah bless this union with abundant joy, affection, peace, and eternal togetherness in this world and the hereafter. Ameen."
+            </p>
+
+            <div class="direct-share-row">
+              <button id="btnShareWhatsApp" class="btn-share-pill" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.072.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.184 1.564 5.938l-1.664 6.082 6.221-1.632c1.704.93 3.669 1.462 5.759 1.462 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+                </svg>
+                <span>Share Invitation on WhatsApp</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="royal-footer">
+      <div class="royal-divider" aria-hidden="true" style="margin-top: 0;">
+        <div class="divider-line"></div>
+        <div class="divider-ornament">✦</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <h3 class="footer-blessing-text">Shukran &amp; Warm Regards</h3>
+      <p class="footer-family-invitation">
+        Your esteemed presence and prayers are the greatest gift you could bestow upon us as Salmanul Faris &amp; Shamna Inna begin their sacred chapter together.
+      </p>
+
+      <div class="footer-compliments-bar">
+        <span>With best Compliments from : Friends &amp; Family</span>
+      </div>
+
+      <div class="footer-instagram-wrap">
+        <p class="footer-instagram-label">✨ For wedding invitation websites like this &amp; hamper gift orders</p>
+        <a
+          href="https://www.instagram.com/hamper.spot?stkn=aG1zZnZma3k3bDJi&utm_source=qr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-instagram-link"
+          id="instagramOrderLink"
+          aria-label="Visit hamper.spot on Instagram for orders"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <span>@hamper.spot</span>
+        </a>
+      </div>
+
+      <div class="footer-cover-nav">
+        <button id="btnReturnToCover" class="btn-return-cover" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Return to Front Cover</span>
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Javascript Engine -->
+  <script src="js/script.js"></script>
+</body>
+</html>
