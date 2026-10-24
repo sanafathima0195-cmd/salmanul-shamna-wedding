@@ -51,7 +51,7 @@ function initEnvelopeReveal() {
 
   let isOpening = false;
 
-  function openEnvelope() {
+  function openEnvelope(e) {
     if (isOpening) return;
     isOpening = true;
 
@@ -68,9 +68,18 @@ function initEnvelopeReveal() {
     }, 1150);
   }
 
-  if (btnWaxSeal) btnWaxSeal.addEventListener("click", openEnvelope);
-  if (envelopeWrapper) envelopeWrapper.addEventListener("click", openEnvelope);
-  if (btnTapSealText) btnTapSealText.addEventListener("click", openEnvelope);
+  // Bind to all envelope interactive elements for instantaneous response
+  if (btnWaxSeal) {
+    btnWaxSeal.addEventListener("click", openEnvelope);
+    btnWaxSeal.addEventListener("touchend", openEnvelope, { passive: true });
+  }
+  if (btnTapSealText) {
+    btnTapSealText.addEventListener("click", openEnvelope);
+    btnTapSealText.addEventListener("touchend", openEnvelope, { passive: true });
+  }
+  if (envelopeWrapper) {
+    envelopeWrapper.addEventListener("click", openEnvelope);
+  }
 
   // Replay Envelope from footer
   if (btnReplayEnvelope) {
@@ -85,31 +94,85 @@ function initEnvelopeReveal() {
 }
 
 // ==========================================================================
-// 2. BACKGROUND MUSIC CONTROLS (Hob A3ma)
+// 2. BACKGROUND MUSIC CONTROLS (Hob A3ma) - UNIVERSAL MOBILE ENGINE
 // ==========================================================================
 let audioPlaying = false;
+let fallbackAttached = false;
+
+function updateMusicPillUI(isPlaying) {
+  const btnToggle = document.getElementById("btnToggleMusic");
+  const trackName = document.getElementById("musicTrackName");
+
+  if (!btnToggle) return;
+
+  if (isPlaying) {
+    btnToggle.classList.add("is-playing");
+    if (trackName) trackName.textContent = "Hob A3ma • حب أعمى";
+  } else {
+    btnToggle.classList.remove("is-playing");
+    if (trackName) trackName.textContent = "Tap for Music 🎵";
+  }
+}
 
 function startWeddingAudio() {
   const audio = document.getElementById("weddingAudio");
-  const btnToggle = document.getElementById("btnToggleMusic");
-
   if (!audio) return;
 
-  audio.volume = 0.8;
+  audio.volume = 0.85;
+
+  // Attempt standard HTML5 play
   const playPromise = audio.play();
 
   if (playPromise !== undefined) {
     playPromise
       .then(() => {
         audioPlaying = true;
-        if (btnToggle) btnToggle.classList.add("is-playing");
+        updateMusicPillUI(true);
       })
-      .catch(() => {
-        // Autoplay may be restricted until another user tap
+      .catch((err) => {
+        console.warn("Autoplay deferred by mobile browser, attaching gesture fallback:", err);
         audioPlaying = false;
-        if (btnToggle) btnToggle.classList.remove("is-playing");
+        updateMusicPillUI(false);
+        attachFallbackAudioTrigger();
       });
   }
+}
+
+/**
+ * Universal gesture listener: If the mobile browser blocked autoplay on the seal tap,
+ * the very next touch/scroll/tap anywhere on the screen will trigger audio seamlessly.
+ */
+function attachFallbackAudioTrigger() {
+  if (fallbackAttached) return;
+  fallbackAttached = true;
+
+  const events = ["click", "touchstart", "touchend", "scroll"];
+
+  function onUserInteraction() {
+    const audio = document.getElementById("weddingAudio");
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play()
+        .then(() => {
+          audioPlaying = true;
+          updateMusicPillUI(true);
+          cleanup();
+        })
+        .catch(() => {
+          // Keep listeners active until audio actually starts
+        });
+    } else {
+      cleanup();
+    }
+  }
+
+  function cleanup() {
+    events.forEach(evt => window.removeEventListener(evt, onUserInteraction));
+    fallbackAttached = false;
+  }
+
+  events.forEach(evt => window.addEventListener(evt, onUserInteraction, { passive: true }));
 }
 
 function initAudioControls() {
@@ -118,29 +181,39 @@ function initAudioControls() {
 
   if (!audio || !btnToggle) return;
 
+  // Preload audio buffer immediately
+  try {
+    audio.load();
+  } catch (e) {}
+
   btnToggle.addEventListener("click", (e) => {
     e.stopPropagation();
     if (audio.paused) {
       audio.play().then(() => {
         audioPlaying = true;
-        btnToggle.classList.add("is-playing");
-      }).catch(err => console.log("Audio play error:", err));
+        updateMusicPillUI(true);
+      }).catch(err => {
+        console.error("Audio play error:", err);
+      });
     } else {
       audio.pause();
       audioPlaying = false;
-      btnToggle.classList.remove("is-playing");
+      updateMusicPillUI(false);
     }
   });
 
   audio.addEventListener("play", () => {
     audioPlaying = true;
-    btnToggle.classList.add("is-playing");
+    updateMusicPillUI(true);
   });
 
   audio.addEventListener("pause", () => {
     audioPlaying = false;
-    btnToggle.classList.remove("is-playing");
+    updateMusicPillUI(false);
   });
+
+  // Ensure initial UI shows inviting text if paused
+  updateMusicPillUI(!audio.paused);
 }
 
 // ==========================================================================

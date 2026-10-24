@@ -1111,6 +1111,20 @@ body {
 .music-pill-btn.is-playing .icon-playing { display: block; }
 .music-pill-btn:not(.is-playing) .icon-playing { display: none; }
 .music-pill-btn:not(.is-playing) .icon-paused { display: block; }
+.music-pill-btn:not(.is-playing) {
+  animation: pulseMusicPill 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseMusicPill {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.25);
+    border-color: var(--gold-primary);
+  }
+  50% {
+    box-shadow: 0 6px 24px rgba(197, 160, 89, 0.65);
+    border-color: var(--gold-light);
+  }
+}
 
 /* --------------------------------------------------------------------------
    6. HERO COVER SECTION (COHESIVE BACKGROUND PER THEME)

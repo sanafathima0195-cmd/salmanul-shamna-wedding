@@ -84,12 +84,12 @@
 
       <!-- Call to Action Prompt Below Envelope -->
       <div class="envelope-bottom-cta">
-        <button class="btn-tap-seal-action" id="btnTapSealText" type="button">
-          <span class="tap-icon">✨</span>
-          <span class="tap-text">Tap the wax seal to open</span>
+        <button class="btn-tap-seal-action" id="btnTapSealText" type="button" aria-label="Tap to open invitation and hear song">
+          <span class="tap-icon">💌</span>
+          <span class="tap-text">Tap wax seal to open &amp; play music 🎵</span>
           <span class="tap-arrow">↓</span>
         </button>
-        <span class="envelope-sub-hint">Secure your royal invitation 🤍</span>
+        <span class="envelope-sub-hint">Turn up your volume for the wedding song ✨</span>
       </div>
 
     </div>
@@ -97,13 +97,13 @@
 
   <!-- ==========================================================================
        ROYAL AUDIO ELEMENT (Hob A3ma / Bi Saraha)
+       Universal MP3 & AAC format for 100% compatibility across iOS, Android, Safari, Chrome
        ========================================================================== -->
-  <audio id="weddingAudio" loop preload="auto">
-    <source src="assets/audio/hob-a3ma.webm" type="audio/webm">
-    <source src="assets/audio/bi-saraha-clean.m4a" type="audio/mp4">
+  <audio id="weddingAudio" loop preload="auto" playsinline webkit-playsinline>
+    <source src="assets/audio/hob-a3ma.mp3" type="audio/mpeg">
+    <source src="assets/audio/hob-a3ma.m4a" type="audio/mp4">
+    <source src="assets/audio/bi-saraha-clean.mp3" type="audio/mpeg">
   </audio>
-
-
 
   <!-- ==========================================================================
        FLOATING CONTROLS: ORDER PILL (LEFT) & MUSIC PILL (RIGHT)
@@ -134,7 +134,7 @@
         <span class="bar bar-2"></span>
         <span class="bar bar-3"></span>
       </div>
-      <span class="music-track-name">Hob A3ma • حب أعمى</span>
+      <span class="music-track-name" id="musicTrackName">Hob A3ma • حب أعمى</span>
       <span class="music-status-icon" aria-hidden="true">
         <svg class="icon-playing" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="6" y="4" width="4" height="16"></rect>
